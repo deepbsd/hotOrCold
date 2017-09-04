@@ -1,0 +1,11 @@
+.board {
+	color: red;
+	height: 700px;
+	width: 700px;
+}
+
+.guesses {
+	color: blue;
+	height: 200px;
+	width: 200px;
+}
