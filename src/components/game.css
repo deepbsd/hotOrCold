@@ -1,7 +1,26 @@
+body {
+  background-color: navy;
+  color: white;
+  display: block;
+  font-family: 'Verdana', sans-serif;
+  font-size: 30px;
+  text-align: center;
+}
+
+.guesses {
+	color: blue;
+	height: 200px;
+	width: 200px;
+}
+
 .board {
-	color: red;
-	height: 700px;
-	width: 700px;
+	background-color: darkblue;
+	color: white;
+	height: 800px;
+	margin: auto;
+	min-width: 500px;
+	padding: 30px;
+	width: 100%;
 }
 
 .guesses {
