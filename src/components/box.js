@@ -5,65 +5,48 @@ import './box.css';
 export default class Box extends React.Component {
     constructor(props) {
         super(props);
-
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
-            name: 'TESTING BOXY AREA',
-            compNumber: this.randomNumber(),
-            gameStatus: '',
-            guessStatus: '',
-            prompt: 'Your guess?',
-            userGuess: ''
-            
+            guess: '',
         };
     }
 
-    randomNumber(){
-        return Math.round(Math.random()*100)+1
-    }
-
-    onSubmit(event){
-        event.preventDefault();
-        const guess = this.state.userGuess;
-        console.log(this.state.userGuess)
-
-    }
-
-    processUserGuess(num){
-        if (num > this.state.compNumber){
+    handleSubmit(e){
+        e.preventDefault();
+        let guess = this.textInput.value.trim();
+        guess = parseInt(guess, 10);
+        console.log('You guessed: ',guess);
+        if (guess && this.textInput) {
+            this.props.getGuess(guess);
             this.setState({
-                guessStatus: 'Too High'
+                guess
             });
-        } else if (num < this.state.compNumber) {
-            this.setState({
-                guessStatus: 'Too Low'
-            });
-        } else {
-            this.setState({
-                guessStatus: 'Invalid input'
-            })
         }
-
     }
+
 
     render() {
 
         return (
-   
             <div className="boxArea">
-                <h2>{this.props.title}</h2>
+                <h4>{this.props.title}</h4>
                 <div className="guessBox">
-                <div>Guess a number between 1 and 100</div>
-                <form onSubmit={(e) => this.onSubmit(e)} >
-                    <input type="text" value={this.state.prompt}
-                    onChange={e => this.processUserGuess(e.target.value)} />
-                    <button>Guess</button>
-                </form>
+                    <div>Guess a number between 1 and 100</div>
+                {/*  How to do notes in React */}
+                    <form onSubmit={(e) => this.handleSubmit(e)} >
+                        <input type="text"  
+
+                        ref={input => this.textInput = input}  />
+                        
+                        <button>Guess</button>
+                    </form>
                 </div>
                 <div>
-                    <div>compupter number is: {this.state.compNumber}</div>
-                    <div>user guess is: {this.state.userGuess}</div>
-                    <div>user Guess Status: {this.state.guessStatus}</div>
-                    
+                    <div>compupter number is: {this.props.compN}</div>
+                    <div>user guess is: {this.state.guess}</div>
+                    <div>user Guess Status: {this.props.guessStatus}</div>
+                    <div>game status is: {this.props.gameStatus}</div>
+                    <div>user guesses: {this.props.userGuesses}</div>
                 </div>
             </div>
         );
@@ -71,5 +54,5 @@ export default class Box extends React.Component {
 }
 
 Box.defaultProps = {
-    title: 'boxy area'
+    title: 'box component'
 };
